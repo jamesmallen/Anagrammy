@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC5DE4E8C1975EAF5FD1D324 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C329F8688C4A03264B60DA /* libPods.a */; };
 		FA4E7C961A81358100598C83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7C951A81358100598C83 /* AppDelegate.swift */; };
 		FA4E7C981A81358100598C83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7C971A81358100598C83 /* ViewController.swift */; };
 		FA4E7C9B1A81358100598C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7C991A81358100598C83 /* Main.storyboard */; };
 		FA4E7C9D1A81358100598C83 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7C9C1A81358100598C83 /* Images.xcassets */; };
 		FA4E7CA01A81358100598C83 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7C9E1A81358100598C83 /* LaunchScreen.xib */; };
 		FA4E7CAC1A81358100598C83 /* AnagrammyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7CAB1A81358100598C83 /* AnagrammyTests.swift */; };
+		FA4E7CB91A813FDD00598C83 /* AnaDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7CB81A813FDD00598C83 /* AnaDict.swift */; };
+		FA4E7CBB1A813FF500598C83 /* enable.txt in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7CBA1A813FF500598C83 /* enable.txt */; };
+		FA4E7CBD1A81447600598C83 /* 3esl.txt in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7CBC1A81447600598C83 /* 3esl.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		191D6D2270E0DBF08A019BB8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		91C329F8688C4A03264B60DA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9668F74FD402298EC94D052E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA4E7C901A81358100598C83 /* Anagrammy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anagrammy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4E7C941A81358100598C83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA4E7C951A81358100598C83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +43,10 @@
 		FA4E7CA51A81358100598C83 /* AnagrammyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnagrammyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4E7CAA1A81358100598C83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA4E7CAB1A81358100598C83 /* AnagrammyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnagrammyTests.swift; sourceTree = "<group>"; };
+		FA4E7CB51A81388800598C83 /* Anagrammy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Anagrammy-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA4E7CB81A813FDD00598C83 /* AnaDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaDict.swift; sourceTree = "<group>"; };
+		FA4E7CBA1A813FF500598C83 /* enable.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable.txt; sourceTree = "<group>"; };
+		FA4E7CBC1A81447600598C83 /* 3esl.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3esl.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC5DE4E8C1975EAF5FD1D324 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +68,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46464572E59073488F18EF00 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				91C329F8688C4A03264B60DA /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA8C6015563376139148FF84 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9668F74FD402298EC94D052E /* Pods.debug.xcconfig */,
+				191D6D2270E0DBF08A019BB8 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FA4E7C871A81358100598C83 = {
 			isa = PBXGroup;
 			children = (
 				FA4E7C921A81358100598C83 /* Anagrammy */,
 				FA4E7CA81A81358100598C83 /* AnagrammyTests */,
 				FA4E7C911A81358100598C83 /* Products */,
+				EA8C6015563376139148FF84 /* Pods */,
+				46464572E59073488F18EF00 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,12 +108,14 @@
 		FA4E7C921A81358100598C83 /* Anagrammy */ = {
 			isa = PBXGroup;
 			children = (
+				FA4E7CB81A813FDD00598C83 /* AnaDict.swift */,
 				FA4E7C951A81358100598C83 /* AppDelegate.swift */,
 				FA4E7C971A81358100598C83 /* ViewController.swift */,
 				FA4E7C991A81358100598C83 /* Main.storyboard */,
 				FA4E7C9C1A81358100598C83 /* Images.xcassets */,
 				FA4E7C9E1A81358100598C83 /* LaunchScreen.xib */,
 				FA4E7C931A81358100598C83 /* Supporting Files */,
+				FA4E7CB51A81388800598C83 /* Anagrammy-Bridging-Header.h */,
 			);
 			path = Anagrammy;
 			sourceTree = "<group>";
@@ -90,6 +123,8 @@
 		FA4E7C931A81358100598C83 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA4E7CBC1A81447600598C83 /* 3esl.txt */,
+				FA4E7CBA1A813FF500598C83 /* enable.txt */,
 				FA4E7C941A81358100598C83 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -119,9 +154,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA4E7CAF1A81358100598C83 /* Build configuration list for PBXNativeTarget "Anagrammy" */;
 			buildPhases = (
+				5289C59A204094FDA1FDE22F /* Check Pods Manifest.lock */,
 				FA4E7C8C1A81358100598C83 /* Sources */,
 				FA4E7C8D1A81358100598C83 /* Frameworks */,
 				FA4E7C8E1A81358100598C83 /* Resources */,
+				087A04E70C29A1A9E5CE3DCE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -192,9 +229,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4E7CBD1A81447600598C83 /* 3esl.txt in Resources */,
 				FA4E7C9B1A81358100598C83 /* Main.storyboard in Resources */,
 				FA4E7CA01A81358100598C83 /* LaunchScreen.xib in Resources */,
 				FA4E7C9D1A81358100598C83 /* Images.xcassets in Resources */,
+				FA4E7CBB1A813FF500598C83 /* enable.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,11 +246,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		087A04E70C29A1A9E5CE3DCE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5289C59A204094FDA1FDE22F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FA4E7C8C1A81358100598C83 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4E7CB91A813FDD00598C83 /* AnaDict.swift in Sources */,
 				FA4E7C981A81358100598C83 /* ViewController.swift in Sources */,
 				FA4E7C961A81358100598C83 /* AppDelegate.swift in Sources */,
 			);
@@ -336,21 +409,25 @@
 		};
 		FA4E7CB01A81358100598C83 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9668F74FD402298EC94D052E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Anagrammy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Anagrammy/Anagrammy-Bridging-Header.h";
 			};
 			name = Debug;
 		};
 		FA4E7CB11A81358100598C83 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 191D6D2270E0DBF08A019BB8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Anagrammy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Anagrammy/Anagrammy-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -407,6 +484,7 @@
 				FA4E7CB11A81358100598C83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA4E7CB21A81358100598C83 /* Build configuration list for PBXNativeTarget "AnagrammyTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +493,7 @@
 				FA4E7CB41A81358100598C83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
