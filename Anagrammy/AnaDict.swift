@@ -103,14 +103,35 @@ class StreamReader : SequenceType {
 
 class AnaDict {
     var words = [String: Bool]()
+    var anaMap = [String: [String]]()
     
     init(wordsFile: String) {
         loadWords(wordsFile)
     }
     
     func addWord(word: String) {
+        let key = AnaDict.keyForWord(word)
+        if anaMap[key] != nil {
+            anaMap[key]?.append(word)
+        } else {
+            anaMap[key] = [word]
+        }
         words[word] = true
     }
+    
+    
+    class func keyForWord(word: String) -> String {
+        var retArr = [String]()
+        for uni in word.lowercaseString.unicodeScalars {
+            if NSCharacterSet.letterCharacterSet().longCharacterIsMember(uni.value) {
+                retArr.append(String(uni))
+            }
+        }
+        
+        return "".join(sorted(retArr))
+        
+    }
+    
     
     func loadWords(wordsFile: String) {
         println("Attempting to load \(wordsFile)...")
@@ -177,7 +198,12 @@ class AnaDict {
     
     
     func getAnagrams(word: String) -> [String] {
-        return anaPermutations(word)
+        // return anaPermutations(word)
+        if let ret = anaMap[AnaDict.keyForWord(word)] {
+            return ret
+        } else {
+            return []
+        }
     }
     
 }
