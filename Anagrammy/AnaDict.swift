@@ -100,22 +100,141 @@ class StreamReader : SequenceType {
     
 }
 
+extension String {
+    var length: Int {
+        return Array(self).count
+    }
+    
+    var lengthOfLettersOnly: Int {
+        var count = 0
+        for uni in self.unicodeScalars {
+            if NSCharacterSet.letterCharacterSet().longCharacterIsMember(uni.value) {
+                ++count
+            }
+        }
+        return count
+    }
+    
+    func substringToIndex(to: Int) -> String {
+        return self.substringToIndex(advance(self.startIndex, to))
+    }
+}
+
+
+class AnaNode {
+    var letter: Character?
+    var depth: Int
+    var words: [String]?
+    var children: [Character: AnaNode]
+    
+    let MIN_WORD_SIZE = 3
+    
+    
+    
+    class func getHistogram(word: String) -> [Character: Int] {
+        var ret = [Character: Int]()
+        // word.lowercaseString.unicodeScalars.st
+        for uni in word.lowercaseString.unicodeScalars {
+            if NSCharacterSet.letterCharacterSet().longCharacterIsMember(uni.value) {
+                let currentLetter = Character(uni)
+                if ret[currentLetter] == nil {
+                    ret[currentLetter] = 1
+                } else {
+                    ++ret[currentLetter]!
+                }
+            }
+        }
+        return ret
+    }
+    
+    init(letter: Character? = nil, depth: Int = 0, words: [String]? = nil) {
+        self.letter = letter
+        self.depth = depth
+        self.words = words
+        self.children = [Character: AnaNode]()
+    }
+    
+    func add(word: String) {
+        var node: AnaNode = self
+        var currentDepth = node.depth
+        
+        for uni in word.lowercaseString.unicodeScalars {
+            if NSCharacterSet.letterCharacterSet().longCharacterIsMember(uni.value) {
+                let currentLetter = Character(uni)
+                var child: AnaNode! = node.children[currentLetter]
+                ++currentDepth
+                if child == nil {
+                    child = AnaNode(letter: currentLetter, depth: currentDepth)
+                    node.children[currentLetter] = child
+                }
+                node = child
+            }
+        }
+        
+        if node.words == nil {
+            node.words = [word]
+        } else {
+            node.words!.append(word)
+        }
+    }
+    
+    // http://stackoverflow.com/questions/55210/algorithm-to-generate-anagrams
+    func anagram(word: String) -> [String] {
+        
+        return _anagram(AnaNode.getHistogram(word), path: [String](), root: self, minLength: word.lengthOfLettersOnly)
+    }
+    
+    func _anagram(var histogram: [Character: Int], var path: [String], root: AnaNode, minLength: Int) -> [String] {
+        var ret = [String]()
+        if self.words != nil && self.depth >= min(minLength, MIN_WORD_SIZE) {
+            var word = "".join(path)
+            if word.lengthOfLettersOnly >= minLength {
+                ret.append(word)
+            }
+            path.append(" ")
+            ret.extend(root._anagram(histogram, path: path, root: root, minLength: minLength))
+            path.removeLast()
+        }
+        for (letter, node) in self.children {
+            
+            var count: Int? = histogram[letter]
+            if count == nil || count == 0 {
+                continue
+            } else {
+                histogram[letter] = count! - 1
+                path.append(String(letter))
+                ret.extend(node._anagram(histogram, path: path, root: root, minLength: minLength))
+                path.removeLast()
+                histogram[letter] = count!
+            }
+            
+        }
+        
+        return ret
+    }
+    
+}
 
 class AnaDict {
     var words = [String: Bool]()
     var anaMap = [String: [String]]()
+    
+    var anaTrie = AnaNode()
     
     init(wordsFile: String) {
         loadWords(wordsFile)
     }
     
     func addWord(word: String) {
+        /*
         let key = AnaDict.keyForWord(word)
         if anaMap[key] != nil {
-            anaMap[key]?.append(word)
+        anaMap[key]?.append(word)
         } else {
-            anaMap[key] = [word]
+        anaMap[key] = [word]
         }
+        */
+        anaTrie.add(word)
         words[word] = true
     }
     
@@ -199,11 +318,13 @@ class AnaDict {
     
     func getAnagrams(word: String) -> [String] {
         // return anaPermutations(word)
+        /*
         if let ret = anaMap[AnaDict.keyForWord(word)] {
             return ret
         } else {
             return []
         }
+*/
+        return anaTrie.anagram(word)
     }
-    
 }
