@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
+    private let notificationManager = NotificationManager()
+    
     var anaDict: AnaDict?
     
     var items: [String] = []
@@ -21,33 +23,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // SVProgressHUD.showWithStatus("Loading words...")
-        dispatch_async(dispatch_get_main_queue(), {
+        // this has to be dispatched on the main thread, otherwise it doesn't show
+        notificationManager.registerObserver(dictionaryLoadingNotificationKey) { notification in
             SVProgressHUD.showWithStatus("Loading dictionary...", maskType: SVProgressHUDMaskType.Black)
-            })
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        }
+        
+        notificationManager.registerObserver(dictionaryLoadedNotificationKey) { notificiation in
+            SVProgressHUD.dismiss()
+        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             self.loadAnaDict()
-            dispatch_async(dispatch_get_main_queue(), {
-                SVProgressHUD.dismiss()
-            })
-        })
+        }
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        items = ["Eenie", "Meenie", "Miney"]
-        
-        
-        /*
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-            [[MyServer sharedManager] fetchFromServerwithCompletionHandler:^(NSArray *elements, BOOL error) {
-                _elements = elements;
-                [_elementsTableView reloadData];
-                [SVProgressHUD dismiss];
-                }];
-            });
-        
-        */
     }
 
     override func didReceiveMemoryWarning() {

@@ -9,7 +9,14 @@
 import UIKit
 import XCTest
 
+
 class AnagrammyTests: XCTestCase {
+    let v = ViewController()
+    
+    private let notificationManager = NotificationManager()
+    
+    var timer: NSTimer!
+    var expectation: XCTestExpectation!
     
     override func setUp() {
         super.setUp()
@@ -21,9 +28,21 @@ class AnagrammyTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testViewDidLoad() {
+        
+        XCTAssertNotNil(v.view, "View did not load")
+    }
+    
+    func testLoadedDictionary() {
+        expectation = expectationWithDescription("loaded")
+        
+        notificationManager.registerObserver(dictionaryLoadedNotificationKey) { notificiation in
+            self.expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(20.0) { error in
+            XCTAssertNil(error, "Error loading dictionary")
+        }
     }
     
     func testPerformanceExample() {

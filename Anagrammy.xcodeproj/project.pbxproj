@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CC5DE4E8C1975EAF5FD1D324 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C329F8688C4A03264B60DA /* libPods.a */; };
+		EF836A037515B01B10977CA9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C329F8688C4A03264B60DA /* libPods.a */; };
+		FA1701D51A8CFC60002C3CC1 /* AnaDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7CB81A813FDD00598C83 /* AnaDict.swift */; };
+		FA1701D61A8CFC70002C3CC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7C951A81358100598C83 /* AppDelegate.swift */; };
+		FA1701D71A8CFCB4002C3CC1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7C971A81358100598C83 /* ViewController.swift */; };
 		FA4E7C961A81358100598C83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7C951A81358100598C83 /* AppDelegate.swift */; };
 		FA4E7C981A81358100598C83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7C971A81358100598C83 /* ViewController.swift */; };
 		FA4E7C9B1A81358100598C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7C991A81358100598C83 /* Main.storyboard */; };
@@ -17,6 +21,11 @@
 		FA4E7CB91A813FDD00598C83 /* AnaDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E7CB81A813FDD00598C83 /* AnaDict.swift */; };
 		FA4E7CBB1A813FF500598C83 /* enable.txt in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7CBA1A813FF500598C83 /* enable.txt */; };
 		FA4E7CBD1A81447600598C83 /* 3esl.txt in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7CBC1A81447600598C83 /* 3esl.txt */; };
+		FABB90AD1A923F250026C301 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB90AC1A923F250026C301 /* Utils.swift */; };
+		FABB90AE1A923F250026C301 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB90AC1A923F250026C301 /* Utils.swift */; };
+		FABB90B01A9246040026C301 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB90AF1A9246040026C301 /* NotificationManager.swift */; };
+		FABB90B11A9246040026C301 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB90AF1A9246040026C301 /* NotificationManager.swift */; };
+		FADB601E1A8D046A00FE2FC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4E7C991A81358100598C83 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +56,9 @@
 		FA4E7CB81A813FDD00598C83 /* AnaDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnaDict.swift; sourceTree = "<group>"; };
 		FA4E7CBA1A813FF500598C83 /* enable.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = enable.txt; sourceTree = "<group>"; };
 		FA4E7CBC1A81447600598C83 /* 3esl.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3esl.txt; sourceTree = "<group>"; };
+		FABB90AC1A923F250026C301 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		FABB90AF1A9246040026C301 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		FADB601F1A8D103D00FE2FC5 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF836A037515B01B10977CA9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +121,7 @@
 		FA4E7C921A81358100598C83 /* Anagrammy */ = {
 			isa = PBXGroup;
 			children = (
+				FADB601F1A8D103D00FE2FC5 /* Podfile */,
 				FA4E7CB81A813FDD00598C83 /* AnaDict.swift */,
 				FA4E7C951A81358100598C83 /* AppDelegate.swift */,
 				FA4E7C971A81358100598C83 /* ViewController.swift */,
@@ -116,6 +130,8 @@
 				FA4E7C9E1A81358100598C83 /* LaunchScreen.xib */,
 				FA4E7C931A81358100598C83 /* Supporting Files */,
 				FA4E7CB51A81388800598C83 /* Anagrammy-Bridging-Header.h */,
+				FABB90AC1A923F250026C301 /* Utils.swift */,
+				FABB90AF1A9246040026C301 /* NotificationManager.swift */,
 			);
 			path = Anagrammy;
 			sourceTree = "<group>";
@@ -173,9 +189,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA4E7CB21A81358100598C83 /* Build configuration list for PBXNativeTarget "AnagrammyTests" */;
 			buildPhases = (
+				E954CE7D0B2B4C8145E3153A /* Check Pods Manifest.lock */,
 				FA4E7CA11A81358100598C83 /* Sources */,
 				FA4E7CA21A81358100598C83 /* Frameworks */,
 				FA4E7CA31A81358100598C83 /* Resources */,
+				B53581087441AD67325F129F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADB601E1A8D046A00FE2FC5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +296,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		B53581087441AD67325F129F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E954CE7D0B2B4C8145E3153A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -286,7 +335,9 @@
 			files = (
 				FA4E7CB91A813FDD00598C83 /* AnaDict.swift in Sources */,
 				FA4E7C981A81358100598C83 /* ViewController.swift in Sources */,
+				FABB90B01A9246040026C301 /* NotificationManager.swift in Sources */,
 				FA4E7C961A81358100598C83 /* AppDelegate.swift in Sources */,
+				FABB90AD1A923F250026C301 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +345,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FABB90B11A9246040026C301 /* NotificationManager.swift in Sources */,
+				FABB90AE1A923F250026C301 /* Utils.swift in Sources */,
+				FA1701D61A8CFC70002C3CC1 /* AppDelegate.swift in Sources */,
+				FA1701D51A8CFC60002C3CC1 /* AnaDict.swift in Sources */,
+				FA1701D71A8CFCB4002C3CC1 /* ViewController.swift in Sources */,
 				FA4E7CAC1A81358100598C83 /* AnagrammyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +489,7 @@
 		};
 		FA4E7CB31A81358100598C83 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9668F74FD402298EC94D052E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -446,12 +503,14 @@
 				INFOPLIST_FILE = AnagrammyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Anagrammy/Anagrammy-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anagrammy.app/Anagrammy";
 			};
 			name = Debug;
 		};
 		FA4E7CB41A81358100598C83 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 191D6D2270E0DBF08A019BB8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -461,6 +520,7 @@
 				INFOPLIST_FILE = AnagrammyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Anagrammy/Anagrammy-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anagrammy.app/Anagrammy";
 			};
 			name = Release;

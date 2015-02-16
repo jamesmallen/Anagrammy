@@ -9,6 +9,14 @@
 import Foundation
 
 
+let dictionaryLoadingNotificationKey = "net.jamesmallen.Anagrammy.dictionaryLoading"
+let dictionaryLoadedNotificationKey = "net.jamesmallen.Anagrammy.dictionaryLoaded"
+
+
+let concurrentDictQueue = dispatch_queue_create("net.jamesmallen.Anagrammy.dictionaryQueue", DISPATCH_QUEUE_CONCURRENT)
+
+
+
 // http://stackoverflow.com/questions/24581517/read-a-file-url-line-by-line-in-swift
 class StreamReader : SequenceType {
     let encoding: UInt
@@ -121,6 +129,11 @@ extension String {
 }
 
 
+class AnaNode2 {
+    var letter: Character?
+}
+
+
 class AnaNode {
     var letter: Character?
     var depth: Int
@@ -184,16 +197,38 @@ class AnaNode {
         return _anagram(AnaNode.getHistogram(word), path: [String](), root: self, minLength: word.lengthOfLettersOnly)
     }
     
+    
+    //func
+    
+    
+    
     func _anagram(var histogram: [Character: Int], var path: [String], root: AnaNode, minLength: Int) -> [String] {
         var ret = [String]()
         if self.words != nil && self.depth >= min(minLength, MIN_WORD_SIZE) {
-            var word = "".join(path)
-            if word.lengthOfLettersOnly >= minLength {
-                ret.append(word)
+            //var word = "".join(path)
+            //if word.lengthOfLettersOnly >= minLength {
+            //    ret.append(word)
+            //}
+            
+            let prefix = "".join(path)
+            
+            for word in self.words! {
+                let newWord = prefix + word + " "
+                if newWord.lengthOfLettersOnly >= minLength {
+                    ret.append(newWord)
+                } else {
+                    path.append(newWord)
+                    ret.extend(root._anagram(histogram, path: path, root: root, minLength: minLength))
+                    path.removeLast()
+                }
             }
+            
+            // ret.extend(self.words!)
+            /*
             path.append(" ")
             ret.extend(root._anagram(histogram, path: path, root: root, minLength: minLength))
             path.removeLast()
+            */
         }
         for (letter, node) in self.children {
             
@@ -202,9 +237,9 @@ class AnaNode {
                 continue
             } else {
                 histogram[letter] = count! - 1
-                path.append(String(letter))
+                //path.append(String(letter))
                 ret.extend(node._anagram(histogram, path: path, root: root, minLength: minLength))
-                path.removeLast()
+                //path.removeLast()
                 histogram[letter] = count!
             }
             
@@ -216,9 +251,6 @@ class AnaNode {
 }
 
 class AnaDict {
-    var words = [String: Bool]()
-    var anaMap = [String: [String]]()
-    
     var anaTrie = AnaNode()
     
     init(wordsFile: String) {
@@ -226,33 +258,13 @@ class AnaDict {
     }
     
     func addWord(word: String) {
-        /*
-        let key = AnaDict.keyForWord(word)
-        if anaMap[key] != nil {
-        anaMap[key]?.append(word)
-        } else {
-        anaMap[key] = [word]
-        }
-        */
         anaTrie.add(word)
-        words[word] = true
     }
-    
-    
-    class func keyForWord(word: String) -> String {
-        var retArr = [String]()
-        for uni in word.lowercaseString.unicodeScalars {
-            if NSCharacterSet.letterCharacterSet().longCharacterIsMember(uni.value) {
-                retArr.append(String(uni))
-            }
-        }
-        
-        return "".join(sorted(retArr))
-        
-    }
-    
     
     func loadWords(wordsFile: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            NSNotificationCenter.defaultCenter().postNotificationName(dictionaryLoadingNotificationKey, object: self)
+        }
         println("Attempting to load \(wordsFile)...")
         var wordCount = 0
         if let aStreamReader = StreamReader(path: wordsFile) {
@@ -266,65 +278,13 @@ class AnaDict {
         } else {
             println("failed")
         }
-    }
-    
-    func wordExists(word: String) -> Bool {
-        if let w = self.words[word] {
-            return true
-        } else {
-            return false
+        dispatch_async(dispatch_get_main_queue()) {
+            NSNotificationCenter.defaultCenter().postNotificationName(dictionaryLoadedNotificationKey, object: self)
         }
-    }
-    
-    class func subpermutations(word: String) -> [String] {
-        var ret = [String]()
-        if countElements(word) == 1 {
-            // base case
-            return [word]
-        }
-        for i in 0..<countElements(word) {
-            let idx = advance(word.startIndex, i)
-            let kernel = String(word[idx])
-            var rest = word.substringToIndex(idx) + word.substringFromIndex(advance(idx, 1))
-            let subs = subpermutations(rest)
-            for partial in subs {
-                ret.append(kernel + partial)
-            }
-        }
-        return ret
-    }
-    
-    func anaPermutations(word: String) -> [String] {
-        var ret = [String]()
-        if countElements(word) == 1 {
-            // base case
-            return [word]
-        }
-        for i in 0..<countElements(word) {
-            let idx = advance(word.startIndex, i)
-            let kernel = String(word[idx])
-            var rest = word.substringToIndex(idx) + word.substringFromIndex(advance(idx, 1))
-            let subs = AnaDict.subpermutations(rest)
-            for partial in subs {
-                let candidate = kernel + partial
-                if wordExists(candidate) && find(ret, candidate) == nil {
-                    ret.append(candidate)
-                }
-            }
-        }
-        return ret
     }
     
     
     func getAnagrams(word: String) -> [String] {
-        // return anaPermutations(word)
-        /*
-        if let ret = anaMap[AnaDict.keyForWord(word)] {
-            return ret
-        } else {
-            return []
-        }
-*/
         return anaTrie.anagram(word)
     }
 }
