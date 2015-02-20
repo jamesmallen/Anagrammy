@@ -58,7 +58,6 @@
 		FA4E7CBC1A81447600598C83 /* 3esl.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3esl.txt; sourceTree = "<group>"; };
 		FABB90AC1A923F250026C301 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FABB90AF1A9246040026C301 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		FADB601F1A8D103D00FE2FC5 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +120,6 @@
 		FA4E7C921A81358100598C83 /* Anagrammy */ = {
 			isa = PBXGroup;
 			children = (
-				FADB601F1A8D103D00FE2FC5 /* Podfile */,
 				FA4E7CB81A813FDD00598C83 /* AnaDict.swift */,
 				FA4E7C951A81358100598C83 /* AppDelegate.swift */,
 				FA4E7C971A81358100598C83 /* ViewController.swift */,
