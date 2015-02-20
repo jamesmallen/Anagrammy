@@ -37,8 +37,8 @@
                                     <action selector="findAnagrams:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OWc-SQ-LSU"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ioz-11-FcW">
-                                <rect key="frame" x="16" y="58" width="568" height="542"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ioz-11-FcW">
+                                <rect key="frame" x="16" y="58" width="568" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="FmM-4N-vk2">
@@ -54,6 +54,12 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="QZh-3Z-6F5"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-ah-Smk">
+                                <rect key="frame" x="16" y="545" width="568" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -69,6 +75,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="label" destination="7Bm-ah-Smk" id="oWo-hH-dRm"/>
                         <outlet property="tableView" destination="Ioz-11-FcW" id="dFQ-4s-koF"/>
                         <outlet property="textField" destination="MVM-2C-Uai" id="w2D-eE-RWc"/>
                     </connections>

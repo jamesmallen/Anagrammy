@@ -14,10 +14,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var anaDict: AnaDict?
     
+    var inputString: String = ""
+    
     var items: [String] = []
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +57,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // noop
+        
+        if let anaDict = self.anaDict {
+            label.text! += items[indexPath.row] + " "
+            self.inputString = self.inputString.removeString(items[indexPath.row])
+            
+            items = anaDict.getAnagrams(self.inputString)
+            tableView.reloadData()
+        }
+        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -64,8 +75,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
     @IBAction func findAnagrams(sender: AnyObject) {
+        inputString = textField.text
+        label.text = ""
         if let anaDict = self.anaDict {
-            items = anaDict.getAnagrams(textField.text)
+            items = anaDict.getAnagrams(inputString)
         }
         tableView.reloadData()
     }
