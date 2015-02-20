@@ -79,6 +79,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         label.text = ""
         if let anaDict = self.anaDict {
             items = anaDict.getAnagrams(inputString)
+            items.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
         }
         tableView.reloadData()
     }

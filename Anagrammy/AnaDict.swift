@@ -193,7 +193,7 @@ class AnaNode {
     var depth: Int
     var words: [String]?
     var children: [Character: AnaNode]
-    //var root: AnaNode
+    var root: AnaNode?
     let MIN_WORD_SIZE = 1
     
     
@@ -219,10 +219,15 @@ class AnaNode {
         self.depth = depth
         self.words = words
         self.children = [Character: AnaNode]()
-        
+        if root == nil {
+            self.root = self
+        } else {
+            self.root = root
+        }
     }
     
     func add(word: String) {
+        
         var node: AnaNode = self
         var currentDepth = node.depth
         
@@ -232,7 +237,7 @@ class AnaNode {
                 var child: AnaNode! = node.children[currentLetter]
                 ++currentDepth
                 if child == nil {
-                    child = AnaNode(letter: currentLetter, depth: currentDepth)
+                    child = AnaNode(letter: currentLetter, depth: currentDepth, root: self.root)
                     node.children[currentLetter] = child
                 }
                 node = child
@@ -250,7 +255,7 @@ class AnaNode {
     func anagram(word: String) -> [String] {
         
         //return _anagram(AnaNode.getHistogram(word), path: [String](), root: self, minLength: word.lengthOfLettersOnly)
-        return _anagram2(WordHistogram(word: word), minLength: 2)
+        return _anagram2(WordHistogram(word: word), minLength: 1)
     }
     
     
@@ -260,34 +265,23 @@ class AnaNode {
         var ret = [String]()
         
         if self.words != nil && self.depth >= min(minLength, MIN_WORD_SIZE) {
-            // TODO: look to see if there is at least one "path" to use all the letters
             for word in self.words! {
                 if onlyComplete {
-                    if hasACompleteAnagramChild(histogram) {
+                    if self.root!.hasACompleteAnagramChild(histogram) {
                         ret.append(word)
                     }
                 } else {
                     ret.append(word)
                 }
             }
-            // ret.extend(self.words!)
         }
         
         for (letter, node) in self.children {
             if histogram[letter] > 0 {
                 --histogram[letter]
-                
                 for word in node._anagram2(histogram, minLength: minLength) {
-//                    if onlyComplete {
-//                          if hasACompleteAnagramChild(histogram) {
                     ret.append(word)
- //                       }
- //                   } else {
- //                       ret.append(word)
- //                   }
                 }
-                
-                // ret.extend(node._anagram2(histogram, minLength: minLength))
                 ++histogram[letter]
             }
         }
@@ -296,7 +290,10 @@ class AnaNode {
     }
     
     func hasACompleteAnagramChild(var histogram: WordHistogram) -> Bool {
-        if self.words != nil && histogram.count == 0 {
+        // if self.words != nil && histogram.count == 0 {
+        if histogram.count == 0 {
+            return true
+        } else if self.words != nil && self.root!.hasACompleteAnagramChild(histogram){
             return true
         } else {
             for (letter, node) in self.children {
