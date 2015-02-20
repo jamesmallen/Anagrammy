@@ -108,6 +108,43 @@ class StreamReader : SequenceType {
     
 }
 
+struct WordHistogram {
+    var histogram: [Character: Int]
+    
+    init(word: String) {
+        histogram = [Character: Int]()
+        for uni in word.lowercaseString.unicodeScalars {
+            if NSCharacterSet.letterCharacterSet().longCharacterIsMember(uni.value) {
+                ++self[Character(uni)]
+            }
+        }
+    }
+    
+    subscript(index: Character) -> Int {
+        get {
+            if let ret = histogram[index] {
+                return ret
+            } else {
+                return 0
+            }
+        }
+        set(newValue) {
+            histogram[index] = newValue
+        }
+    }
+    
+    var count: Int {
+        get {
+            var ret = 0
+            for (key, value) in histogram {
+                ret += value
+            }
+            return ret
+        }
+    }
+    
+}
+
 extension String {
     var length: Int {
         return Array(self).count
@@ -126,6 +163,21 @@ extension String {
     func substringToIndex(to: Int) -> String {
         return self.substringToIndex(advance(self.startIndex, to))
     }
+    
+    func removeString(sub: String) -> String {
+        var histogram = WordHistogram(word: sub)
+        
+        var ret = ""
+        for c in self {
+            if histogram[c] == 0 {
+                ret += String(c)
+            } else {
+                --histogram[c]
+            }
+        }
+        
+        return ret
+    }
 }
 
 
@@ -134,13 +186,15 @@ class AnaNode2 {
 }
 
 
+
+
 class AnaNode {
     var letter: Character?
     var depth: Int
     var words: [String]?
     var children: [Character: AnaNode]
-    
-    let MIN_WORD_SIZE = 3
+    var root: AnaNode?
+    let MIN_WORD_SIZE = 1
     
     
     
@@ -160,14 +214,20 @@ class AnaNode {
         return ret
     }
     
-    init(letter: Character? = nil, depth: Int = 0, words: [String]? = nil) {
+    init(letter: Character? = nil, depth: Int = 0, words: [String]? = nil, root: AnaNode? = nil) {
         self.letter = letter
         self.depth = depth
         self.words = words
         self.children = [Character: AnaNode]()
+        if root == nil {
+            self.root = self
+        } else {
+            self.root = root
+        }
     }
     
     func add(word: String) {
+        
         var node: AnaNode = self
         var currentDepth = node.depth
         
@@ -177,7 +237,7 @@ class AnaNode {
                 var child: AnaNode! = node.children[currentLetter]
                 ++currentDepth
                 if child == nil {
-                    child = AnaNode(letter: currentLetter, depth: currentDepth)
+                    child = AnaNode(letter: currentLetter, depth: currentDepth, root: self.root)
                     node.children[currentLetter] = child
                 }
                 node = child
@@ -194,21 +254,66 @@ class AnaNode {
     // http://stackoverflow.com/questions/55210/algorithm-to-generate-anagrams
     func anagram(word: String) -> [String] {
         
-        return _anagram(AnaNode.getHistogram(word), path: [String](), root: self, minLength: word.lengthOfLettersOnly)
+        //return _anagram(AnaNode.getHistogram(word), path: [String](), root: self, minLength: word.lengthOfLettersOnly)
+        return _anagram2(WordHistogram(word: word), minLength: 1)
     }
     
     
     //func
+    
+    func _anagram2(var histogram: WordHistogram, minLength: Int, onlyComplete: Bool = true) -> [String] {
+        var ret = [String]()
+        
+        if self.words != nil && self.depth >= min(minLength, MIN_WORD_SIZE) {
+            for word in self.words! {
+                if onlyComplete {
+                    if self.root!.hasACompleteAnagramChild(histogram) {
+                        ret.append(word)
+                    }
+                } else {
+                    ret.append(word)
+                }
+            }
+        }
+        
+        for (letter, node) in self.children {
+            if histogram[letter] > 0 {
+                --histogram[letter]
+                for word in node._anagram2(histogram, minLength: minLength) {
+                    ret.append(word)
+                }
+                ++histogram[letter]
+            }
+        }
+        
+        return ret
+    }
+    
+    func hasACompleteAnagramChild(var histogram: WordHistogram) -> Bool {
+        // if self.words != nil && histogram.count == 0 {
+        if histogram.count == 0 {
+            return true
+        } else if self.words != nil && self.root!.hasACompleteAnagramChild(histogram){
+            return true
+        } else {
+            for (letter, node) in self.children {
+                if histogram[letter] > 0 {
+                    --histogram[letter]
+                    if node.hasACompleteAnagramChild(histogram) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+    
     
     
     
     func _anagram(var histogram: [Character: Int], var path: [String], root: AnaNode, minLength: Int) -> [String] {
         var ret = [String]()
         if self.words != nil && self.depth >= min(minLength, MIN_WORD_SIZE) {
-            //var word = "".join(path)
-            //if word.lengthOfLettersOnly >= minLength {
-            //    ret.append(word)
-            //}
             
             let prefix = "".join(path)
             
@@ -223,12 +328,6 @@ class AnaNode {
                 }
             }
             
-            // ret.extend(self.words!)
-            /*
-            path.append(" ")
-            ret.extend(root._anagram(histogram, path: path, root: root, minLength: minLength))
-            path.removeLast()
-            */
         }
         for (letter, node) in self.children {
             
@@ -237,9 +336,7 @@ class AnaNode {
                 continue
             } else {
                 histogram[letter] = count! - 1
-                //path.append(String(letter))
                 ret.extend(node._anagram(histogram, path: path, root: root, minLength: minLength))
-                //path.removeLast()
                 histogram[letter] = count!
             }
             

@@ -102,9 +102,9 @@
 			children = (
 				FA4E7C921A81358100598C83 /* Anagrammy */,
 				FA4E7CA81A81358100598C83 /* AnagrammyTests */,
-				FA4E7C911A81358100598C83 /* Products */,
-				EA8C6015563376139148FF84 /* Pods */,
 				46464572E59073488F18EF00 /* Frameworks */,
+				EA8C6015563376139148FF84 /* Pods */,
+				FA4E7C911A81358100598C83 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,15 +121,15 @@
 			isa = PBXGroup;
 			children = (
 				FA4E7CB81A813FDD00598C83 /* AnaDict.swift */,
+				FA4E7CB51A81388800598C83 /* Anagrammy-Bridging-Header.h */,
 				FA4E7C951A81358100598C83 /* AppDelegate.swift */,
-				FA4E7C971A81358100598C83 /* ViewController.swift */,
-				FA4E7C991A81358100598C83 /* Main.storyboard */,
 				FA4E7C9C1A81358100598C83 /* Images.xcassets */,
 				FA4E7C9E1A81358100598C83 /* LaunchScreen.xib */,
-				FA4E7C931A81358100598C83 /* Supporting Files */,
-				FA4E7CB51A81388800598C83 /* Anagrammy-Bridging-Header.h */,
-				FABB90AC1A923F250026C301 /* Utils.swift */,
+				FA4E7C991A81358100598C83 /* Main.storyboard */,
 				FABB90AF1A9246040026C301 /* NotificationManager.swift */,
+				FA4E7C931A81358100598C83 /* Supporting Files */,
+				FABB90AC1A923F250026C301 /* Utils.swift */,
+				FA4E7C971A81358100598C83 /* ViewController.swift */,
 			);
 			path = Anagrammy;
 			sourceTree = "<group>";
